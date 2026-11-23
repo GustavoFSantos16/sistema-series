@@ -14,7 +14,7 @@ CREATE TABLE usuarios (
 -- Criar tabela de diretores
 CREATE TABLE diretores (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
+    nome_diretor VARCHAR(100) NOT NULL,
     nacionalidade VARCHAR(50),
     imagem VARCHAR(255)
 );
@@ -22,7 +22,7 @@ CREATE TABLE diretores (
 -- Criar tabela de séries
 CREATE TABLE series (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    diretor_id INT,
+    nome_diretor VARCHAR(100) NOT NULL,
     titulo VARCHAR(100) NOT NULL,
     ano_lancamento YEAR,
     temporadas INT,
@@ -31,7 +31,7 @@ CREATE TABLE series (
     sinopse TEXT,
     plataforma VARCHAR(100),
     imagem_capa VARCHAR(255),
-    FOREIGN KEY (diretor_id) REFERENCES diretores(id)
+    FOREIGN KEY (nome_diretor) REFERENCES diretores(nome_diretor)
 );
 
 -- Inserir usuário padrão "admin"
