@@ -1,13 +1,65 @@
+<?php
+
+session_start();
+
+
+if (isset($_SESSION['usuario'])) {
+    header('Location: index.php');
+    exit();
+}
+
+include('conexao.php');
+
+$mensagem      = '';
+$tipo_mensagem = '';
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $usuario = $_POST['usuario'] ?? '';
+    $senha   = $_POST['senha']   ?? '';
+
+    if (empty($usuario) || empty($senha)) {
+        $mensagem      = "Preencha todos os campos.";
+        $tipo_mensagem = "error";
+    } else {
+        
+        $stmt = $conn->prepare("SELECT * FROM usuarios WHERE usuario = ?");
+        $stmt->bind_param("s", $usuario); // "s" = tipo string
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+
+            
+            if (password_verify($senha, $user['senha'])) {
+                // ✅ Login ok: salva dados na sessão
+                $_SESSION['usuario']    = $usuario;
+                $_SESSION['usuario_id'] = $user['id'];
+                header('Location: index.php');
+                exit();
+            } else {
+                $mensagem      = "Senha incorreta.";
+                $tipo_mensagem = "error";
+            }
+        } else {
+            $mensagem      = "Usuário não encontrado.";
+            $tipo_mensagem = "error";
+        }
+        $stmt->close();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login — Sistema Musical</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27></text></svg>">
-    
-    <link rel="stylesheet" href="styles.css">
+    <title>Login - CineVerso</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🎬</text></svg>">
+    <link rel="stylesheet" href="styles.css?v=11">
 </head>
 
 <body class="login-page">
@@ -15,17 +67,30 @@
     <div class="login-card">
 
         <div class="login-header">
-            <h1>🎵 Sistema Musical</h1>
+            <h1>🍿 CineVerso</h1>
             <p>Entre com suas credenciais</p>
         </div>
 
-       
-        <form method="post" action="#">
+    
+        <?php if ($mensagem): ?>
+            <div class="message <?php echo $tipo_mensagem; ?>">
+                <?php echo $tipo_mensagem === 'error' ? '⚠️' : '✅'; ?>
+                <?php echo $mensagem; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['logout']) && $_GET['logout'] === 'success'): ?>
+            <div class="message success">✅ Você saiu do sistema.</div>
+        <?php endif; ?>
+
+        <form method="post" action="">
             <div class="form-group">
                 <label for="usuario">Usuário</label>
+               
                 <input type="text"
                     id="usuario"
                     name="usuario"
+                    value="<?php echo htmlspecialchars($_POST['usuario'] ?? ''); ?>"
                     required
                     autocomplete="username"
                     placeholder="Seu usuário">
@@ -44,7 +109,7 @@
             <button type="submit" class="btn-primary">Entrar</button>
         </form>
 
-        <!-- Dica de credenciais que serão criadas de verdade na Fase 2 -->
+        <!-- Dica visível apenas em ambiente de desenvolvimento -->
         <div class="login-hint">
             <strong>Credenciais de teste:</strong><br>
             Usuário: <code>admin</code> &nbsp;·&nbsp; Senha: <code>123</code>
@@ -53,4 +118,5 @@
     </div>
 
 </body>
+
 </html>

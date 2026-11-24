@@ -1,0 +1,646 @@
+/* =========================================================
+   CINEVERSO — TEMA DARK AZUL PROFUNDO COMPLETO (styles.css)
+   ========================================================= */
+
+:root {
+    --bg-main: #050811;          /* Preto azulado ultra-escuro */
+    --bg-surface: #0a101f;       /* Cartões e containers principais */
+    --bg-card: #0e162b;          /* Cards internos e menus */
+    --bg-input: #111b33;         /* Campos de formulário e botões secundários */
+    --bg-hover: #172544;         /* Realce ao passar o mouse */
+    --border-color: #1c2c52;     /* Bordas em azul escuro */
+
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    --accent: #0077ff;           /* Azul elétrico principal */
+    --accent-hover: #298eff;     /* Azul claro no hover */
+    --cyan: #38bdf8;             /* Azul ciano para detalhes e links */
+    --accent-glow: rgba(0, 119, 255, 0.35);
+
+    --red: #f43f5e;              /* Vermelho/rosa para alertas e excluir */
+    --green: #10b981;            /* Verde para sucesso */
+
+    --radius: 12px;
+    --radius-sm: 7px;
+    --shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+    --transition: all 0.22s ease;
+}
+
+/* Reset e Base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+    background: radial-gradient(circle at 50% 0%, #0d1a38 0%, var(--bg-main) 65%);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+}
+
+/* =========================================================
+   CONTAINERS GERAIS (Todas as Páginas)
+   ========================================================= */
+.container {
+    max-width: 1120px;
+    margin: 0 auto;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+/* =========================================================
+   CABEÇALHO DAS PÁGINAS & MENU PRINCIPAL (index.php)
+   ========================================================= */
+.page-header-bar,
+.header-bar,
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.page-header-bar h1,
+.page-header-bar h2,
+.header-bar h1,
+.header-bar h2 {
+    font-size: 1.65rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+h3 {
+    font-size: 1.2rem;
+    margin: 2rem 0 1rem;
+    color: var(--cyan);
+    font-weight: 600;
+}
+
+/* Cards de Menu no index.php */
+.menu-grid,
+.cards-grid,
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+}
+
+.menu-card,
+.nav-card,
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.65rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: var(--transition);
+}
+
+.menu-card:hover,
+.nav-card:hover,
+.card:hover {
+    background-color: var(--bg-hover);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 119, 255, 0.22);
+}
+
+.menu-card h3,
+.nav-card h3,
+.card h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    color: #ffffff;
+}
+
+.menu-card p,
+.nav-card p,
+.card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* =========================================================
+   TELA DE LOGIN (login.php)
+   ========================================================= */
+.login-container,
+.login-box,
+.auth-box {
+    max-width: 420px;
+    margin: 4rem auto;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 2.25rem 2rem;
+    box-shadow: var(--shadow);
+}
+
+.login-container h1,
+.login-container h2,
+.login-box h1,
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.login-container p.subtitle,
+.login-box p.subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    margin-bottom: 1.75rem;
+}
+
+.login-box .form-group,
+.login-container .form-group {
+    margin-bottom: 1.15rem;
+}
+
+.login-box button,
+.login-container button {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+}
+
+/* =========================================================
+   BOTÕES & LINKS
+   ========================================================= */
+.btn-primary,
+.btn-back,
+.btn-edit,
+.btn-delete,
+.btn-logout,
+.btn,
+button[type="submit"],
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.62rem 1.15rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.btn-primary,
+button[type="submit"] {
+    background: linear-gradient(135deg, var(--accent) 0%, #0052b8 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.btn-primary:hover,
+button[type="submit"]:hover {
+    background: linear-gradient(135deg, var(--accent-hover) 0%, #0066e6 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 22px rgba(0, 119, 255, 0.5);
+}
+
+.btn-back,
+.btn-secondary {
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-back:hover,
+.btn-secondary:hover {
+    background-color: var(--bg-hover);
+    border-color: var(--cyan);
+}
+
+.btn-logout {
+    background-color: rgba(244, 63, 94, 0.14);
+    color: #fb7185;
+    border: 1px solid rgba(244, 63, 94, 0.35);
+}
+
+.btn-logout:hover {
+    background-color: var(--red);
+    color: #ffffff;
+}
+
+/* Botões compactos das tabelas */
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+}
+
+.btn-edit {
+    background-color: rgba(56, 189, 248, 0.12);
+    color: var(--cyan);
+    border: 1px solid rgba(56, 189, 248, 0.32);
+    padding: 0.42rem 0.75rem;
+    font-size: 0.85rem;
+}
+
+.btn-edit:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+}
+
+.btn-delete {
+    background-color: rgba(244, 63, 94, 0.12);
+    color: #fb7185;
+    border: 1px solid rgba(244, 63, 94, 0.32);
+    padding: 0.42rem 0.7rem;
+    font-size: 0.85rem;
+}
+
+.btn-delete:hover {
+    background-color: var(--red);
+    border-color: var(--red);
+    color: #ffffff;
+}
+
+/* =========================================================
+   MENSAGENS DE FEEDBACK
+   ========================================================= */
+.message,
+.alert {
+    padding: 0.9rem 1.15rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.message.success,
+.alert-success {
+    background-color: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.38);
+    color: #34d399;
+}
+
+.message.error,
+.alert-error {
+    background-color: rgba(244, 63, 94, 0.12);
+    border: 1px solid rgba(244, 63, 94, 0.38);
+    color: #fb7185;
+}
+
+/* =========================================================
+   FORMULÁRIOS (GRID RESPONSIVO)
+   ========================================================= */
+form {
+    margin-bottom: 1.5rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-muted);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.28);
+    background-color: #15223f;
+}
+
+select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+textarea {
+    min-height: 105px;
+    resize: vertical;
+}
+
+input[type="file"] {
+    padding: 0.5rem;
+    background-color: var(--bg-input);
+    border: 1px dashed var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    margin-right: 0.75rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+.form-group small {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Pré-visualização de imagem */
+.current-image {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    width: fit-content;
+}
+
+.current-image img {
+    width: 52px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* =========================================================
+   BARRA DE FILTROS (listagem_series.php)
+   ========================================================= */
+.filters {
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 1.15rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0;
+}
+
+.filter-group {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.filter-item {
+    flex: 1;
+    min-width: 190px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* =========================================================
+   TABELAS & MINIATURAS
+   ========================================================= */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-main);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.93rem;
+}
+
+thead {
+    background-color: #070c18;
+    border-bottom: 2px solid var(--border-color);
+}
+
+th {
+    padding: 0.85rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--cyan);
+}
+
+td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: rgba(0, 119, 255, 0.07);
+}
+
+td strong {
+    display: block;
+    color: #ffffff;
+    font-size: 0.98rem;
+}
+
+td small {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    margin-top: 0.2rem;
+    line-height: 1.4;
+}
+
+.col-capa {
+    width: 72px;
+}
+
+.col-acoes {
+    width: 190px;
+}
+
+.table-thumbnail {
+    width: 48px;
+    height: 66px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    display: block;
+}
+
+.no-image {
+    width: 48px;
+    height: 66px;
+    background-color: var(--bg-input);
+    border: 1px dashed var(--border-color);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.68rem;
+    line-height: 1.2;
+    color: var(--text-muted);
+}
+
+.empty-cell {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* =========================================================
+   QUEM SOMOS & CONTATO (quemSomos.php / entreContato.php)
+   ========================================================= */
+.info-section,
+.about-section,
+.contact-section {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.info-section p,
+.about-section p {
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+a {
+    color: var(--cyan);
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem 0.5rem;
+    }
+
+    .container {
+        padding: 1.25rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-actions {
+        justify-content: flex-end;
+    }
+}
