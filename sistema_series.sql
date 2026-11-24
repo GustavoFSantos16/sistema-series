@@ -1,5 +1,5 @@
 -- Criar banco de dados do sistema de séries
-CREATE DATABASE sistema_series;
+CREATE DATABASE IF NOT EXISTS sistema_series;
 
 -- Usar o banco de dados
 USE sistema_series;
@@ -14,7 +14,7 @@ CREATE TABLE usuarios (
 -- Criar tabela de diretores
 CREATE TABLE diretores (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome_diretor VARCHAR(100) NOT NULL,
+    nome_diretor VARCHAR(100) NOT NULL UNIQUE,
     nacionalidade VARCHAR(50),
     imagem VARCHAR(255)
 );
@@ -34,7 +34,6 @@ CREATE TABLE series (
     FOREIGN KEY (nome_diretor) REFERENCES diretores(nome_diretor)
 );
 
--- Inserir usuário padrão "admin"
--- Utilize uma senha com hash gerado por password_hash() no PHP.
+-- Inserir usuário padrão "admin" e senha "123"
 INSERT INTO usuarios (usuario, senha)
 VALUES ('admin', '$2y$12$zw1c2aDgt4HHnAzXc3g3dOV6Mn96Dm2UaSIketIhYe1xmtuaJG6qa');
